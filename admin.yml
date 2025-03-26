@@ -1,0 +1,38 @@
+- name: Configuration poste administrateur
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Mettre à jour la liste des paquets
+      apt:
+        update_cache: yes
+
+    - name: Installer outils réseau
+      apt:
+        name:
+          - wireshark
+          - net-tools
+          - nmap
+        state: present
+
+    - name: Installer Apache
+      apt:
+        name: apache2
+        state: present
+
+    - name: Installer VirtualBox
+      apt:
+        name: virtualbox
+        state: present
+
+    - name: Installer outils de diagnostic
+      apt:
+        name:
+          - htop
+          - lshw
+          - iptraf-ng
+        state: present
+
+    - name: Forcer changement de mot de passe
+      user:
+        name: admin
+        expire: true

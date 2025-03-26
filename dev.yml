@@ -1,1 +1,18 @@
-test
+- name: Config poste développeur
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Installer outils dev
+      apt:
+        name:
+          - docker.io
+          - git
+          - nodejs
+          - openjdk-17-jdk
+        update_cache: yes
+        state: present
+
+    - name: Forcer changement de mot de passe
+      user:
+        name: dev
+        expire: true

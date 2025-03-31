@@ -19,6 +19,6 @@
     - name: Forcer le changement de mot de passe à la prochaine connexion
       user:
         name: dev
-        expire: true
+        password_expire: true
 
 

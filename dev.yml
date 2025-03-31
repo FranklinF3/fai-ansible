@@ -2,17 +2,21 @@
   hosts: localhost
   become: true
   tasks:
-    - name: Installer outils dev
-      package:
+    - name: Mettre à jour les paquets
+      apt:
+        update_cache: yes
+
+    - name: Installer outils dev (docker, git, nodejs, JDK)
+      apt:
         name:
           - docker.io
           - git
           - nodejs
           - openjdk-17-jdk
-        update_cache: yes
         state: present
 
-    - name: Forcer changement de mot de passe
+    - name: Forcer changement de mot de passe pour dev
       user:
         name: dev
         expire: true
+

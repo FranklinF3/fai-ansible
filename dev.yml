@@ -3,22 +3,20 @@
   become: true
 
   tasks:
-    - name: Mettre à jour les paquets
-      apt:
-        update_cache: yes
+    - name: Mettre à jour les paquets (via shell)
+      shell: apt-get update && apt-get upgrade -y
+      args:
+        warn: false
 
-    - name: Installer les paquets nécessaires
-      apt:
-        name:
-          - docker.io
-          - git
-          - nodejs
-          - openjdk-17-jdk
-        state: present
+    - name: Installer les paquets nécessaires (via shell)
+      shell: apt-get install -y docker.io git nodejs openjdk-17-jdk
+      args:
+        warn: false
 
     - name: Forcer le changement de mot de passe à la prochaine connexion
       user:
         name: dev
         password_expire: true
+
 
 
